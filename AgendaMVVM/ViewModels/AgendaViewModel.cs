@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command; // ... esto
 using System.Windows.Input;
-
+using AgendaMVVM.DAL;
 namespace AgendaMVVM.ViewModels
 {
     public class AgendaViewModel:INotifyPropertyChanged // <<- y esto
@@ -18,6 +18,8 @@ namespace AgendaMVVM.ViewModels
         {
             Cargar();
             VerCommand=new RelayCommand(Ver);
+            AgregarCommand=new RelayCommand(Agregar);
+            GuardarCommand = new RelayCommand(Guardar);
         }
 
         private ObservableCollection<Contacto> contactos;
@@ -47,7 +49,8 @@ namespace AgendaMVVM.ViewModels
 
         public void Cargar()
         {
-            contactos = new ObservableCollection<Contacto>();
+            contactos = ContactosDAL.Get();
+                /*new ObservableCollection<Contacto>();
             contactos.Add(new()
             {
                 Nombre="Hugo",
@@ -65,15 +68,29 @@ namespace AgendaMVVM.ViewModels
                 Nombre = "Luis",
                 Id = 2,
                 Correo = "luis@pato.org"
-            });
+            });*/
         }
 
+        private void Agregar()
+        {
+            Contacto = new Contacto();
+            CambiarVista("Agregar");
+        }
+
+        private void Guardar()
+        {
+            if (Contacto.Id==0)
+            {
+                ContactosDAL.Add(Contacto);
+            }
+        }
         public Contacto Contacto { get; set; }
 
         public string Vista { get; set; }="";
         private void CambiarVista(string vista)
         {
             Vista = vista;
+            
             RaiseEvent();        }
     }
 }

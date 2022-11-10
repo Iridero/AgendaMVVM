@@ -39,6 +39,15 @@ namespace AgendaMVVM.DAL
                reader.Close();
             return contactos;
         }
+        public static void Add(Contacto nuevo)
+        {
+            string query = "INSERT INTO contacto (nombre, correo, telefono) Values(@nombre,@correo,@telefono)";
+            MySqlCommand cmd = new MySqlCommand(query,connection);
+            cmd.Parameters.AddWithValue("@nombre", nuevo.Nombre);
+            cmd.Parameters.AddWithValue("@correo", nuevo.Correo);
+            cmd.Parameters.AddWithValue("@telefono", nuevo.Telefono);
+            cmd.ExecuteNonQuery();
 
+        }
     }
 }

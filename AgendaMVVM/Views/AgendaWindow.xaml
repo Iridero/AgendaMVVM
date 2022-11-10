@@ -9,7 +9,10 @@
         Title="AgendaWindow" Height="450" Width="800">
     <DockPanel>
         <DockPanel DockPanel.Dock="Left">
-            <TextBlock DockPanel.Dock="Top" >Contactos</TextBlock>
+            <DockPanel DockPanel.Dock="Top">
+                <Button DockPanel.Dock="Right" Command="{Binding AgregarCommand}" Content=" + "/>
+                <TextBlock  >Contactos</TextBlock>
+            </DockPanel>
             <Button Content="Ver contacto" Command="{Binding VerCommand}"
                      DockPanel.Dock="Bottom"/>
             <ListBox x:Name="lstContactos" Width="200" ItemsSource="{Binding Contactos}"
@@ -19,6 +22,7 @@
         <ContentControl x:Name="contenido">
             <ContentControl.Resources>
                 <local:InicioControl x:Key="Inicio"/>
+                <local:NuevoControl x:Key="Agregar"/>
             </ContentControl.Resources>
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
@@ -27,6 +31,10 @@
                             <Setter  
                                     Property="Content" 
                                     Value="{StaticResource Inicio}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Vista}" Value="Agregar">
+                            <Setter Property="Content"
+                                    Value="{StaticResource Agregar}"/>
                         </DataTrigger>
 
                     </Style.Triggers>

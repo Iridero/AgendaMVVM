@@ -21,13 +21,13 @@
             <TextBlock Text="Nombre" Grid.Column="0" Grid.Row="0" />
             <TextBlock Text="Correo" Grid.Column="0" Grid.Row="1" />
             <TextBlock Text="Telefono" Grid.Column="0" Grid.Row="2" />
-            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Nombre}" />
-            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Correo}" />
-            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Telefono}" />
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Contacto.Nombre}" />
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Contacto.Correo}" />
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Contacto.Telefono}" />
         </Grid>
         <DockPanel LastChildFill="False">
-            <Button Content="Cancelar" Command="{Binding Cancelar}" DockPanel.Dock="Right"/>
-            <Button Content="Guardar" Command="{Binding Guardar}" DockPanel.Dock="Right"/>
+            <Button Content="Cancelar" Command="{Binding CancelarCommand}" DockPanel.Dock="Right"/>
+            <Button Content="Guardar" Command="{Binding GuardarCommand}" DockPanel.Dock="Right"/>
         </DockPanel>
     </StackPanel>
 </UserControl>
